@@ -1,0 +1,19 @@
+server:
+  port: 8900
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: /Users/luomu32/config-center/spring-cloud-demo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#encrypt:
+#  key: kiej5rRTe_u3245234
