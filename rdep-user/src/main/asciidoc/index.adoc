@@ -1,0 +1,121 @@
+[[overview-http-status-codes]]
+== HTTP状态码
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| 请求成功，处理成功
+
+| `400 Bad Request`
+| 请求参数错误。如缺少必要的参数；参数类型错误；参数校验错误等
+
+| `403 Forbidden`
+| 访问受限的资源，需要通过身份认证
+
+| `404 Not Found`
+| 请求资源不存在
+
+| `415 Unsupported Media Type`
+| 不支持的媒体类型
+
+| `405 Method Not Allowed`
+| 不支持的Http Method。如仅支持POST，而请求却是GET
+
+| `500 Internal Server Error`
+| 服务错误
+
+| `503 Service Unavailable`
+| 服务暂不可用
+|===
+
+[[overview-errors]]
+== Errors
+
+Whenever an error response (status code >= 400) is returned, the body will contain a JSON object
+that describes the problem. The error object has the following structure:
+
+include::{snippets}/error/response-fields.adoc[]
+
+For example, a request that attempts to apply a non-existent tag to a note will produce a
+`400 Bad Request` response:
+
+include::{snippets}/error/http-response.adoc[]
+
+= 用户模块
+== 用户
+=== 创建
+==== 参数
+
+include::{snippets}/user/create/request-parameters.adoc[]
+
+==== 请求示例
+
+include::{snippets}/user/create/curl-request.adoc[]
+
+==== 响应
+
+include::{snippets}/user/create/http-response.adoc[]
+
+=== 更新
+
+==== 参数
+
+include::{snippets}/user/update/path-parameters.adoc[]
+
+==== 请求示例
+
+include::{snippets}/user/update/curl-request.adoc[]
+
+==== 响应示例
+
+include::{snippets}/user/update/http-response.adoc[]
+
+=== 修改密码
+
+==== 参数
+
+include::{snippets}/user/changePass/path-parameters.adoc[]
+include::{snippets}/user/changePass/request-parameters.adoc[]
+
+==== 请求示例
+
+include::{snippets}/user/changePass/curl-request.adoc[]
+
+==== 响应示例
+
+include::{snippets}/user/changePass/http-response.adoc[]
+
+=== 认证
+
+==== 参数
+
+include::{snippets}/user/auth/request-parameters.adoc[]
+
+==== 请求示例
+
+include::{snippets}/user/auth/curl-request.adoc[]
+
+==== 响应示例
+
+include::{snippets}/user/auth/http-response.adoc[]
+
+=== 查询
+
+==== 参数
+
+include::{snippets}/user/fetch/request-parameters.adoc[]
+
+==== 响应
+
+include::{snippets}/user/fetch/response-fields.adoc[]
+
+==== 请求示例
+
+include::{snippets}/user/fetch/curl-request.adoc[]
+
+==== 响应示例
+
+include::{snippets}/user/fetch/http-response.adoc[]
+
+== 角色
