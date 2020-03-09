@@ -1,10 +1,12 @@
 package xyz.luomu32.rdep.gateway.filter;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.javafx.collections.MappingChange;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.reactivestreams.Publisher;
@@ -139,14 +141,25 @@ public class JwtFilter implements GlobalFilter, Ordered {
                     byte[] content = new byte[dataBuffer.readableByteCount()];
                     dataBuffer.read(content);
                     try {
-                        User user = MAPPER.readValue(content, User.class);
-                        String token = generatorToken(user.getId(), user.getUsername(), user.getRealName());
-                        user.setToken(token);
+                        Object result;
+
+                        JsonNode node = MAPPER.readTree(content);
+                        if (node.has("message")) {
+                            ErrorResponse response = new ErrorResponse();
+                            response.setCode(node.get("code").getTextValue());
+                            response.setMessage(node.get("message").getTextValue());
+                            result = response;
+                        } else {
+                            User user = MAPPER.readValue(content, User.class);
+                            String token = generatorToken(user.getId(), user.getUsername(), user.getRealName());
+                            user.setToken(token);
+                            result = user;
+                        }
 
                         //释放掉内存
                         DataBufferUtils.release(dataBuffer);
 
-                        return exchange.getResponse().bufferFactory().wrap(MAPPER.writeValueAsBytes(user));
+                        return exchange.getResponse().bufferFactory().wrap(MAPPER.writeValueAsBytes(result));
                     } catch (IOException e) {
                         e.printStackTrace();
                         return dataBuffer;
@@ -191,5 +204,12 @@ public class JwtFilter implements GlobalFilter, Ordered {
     public static class Role {
         private Long id;
         private String name;
+    }
+
+    @Data
+    public static class ErrorResponse {
+        private String code;
+
+        private String message;
     }
 }
