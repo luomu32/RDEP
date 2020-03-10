@@ -1,7 +1,6 @@
 package xyz.luomu32.rdep.gateway.filter;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.javafx.collections.MappingChange;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import lombok.Data;
@@ -27,8 +26,6 @@ import reactor.core.publisher.Mono;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.HashMap;
