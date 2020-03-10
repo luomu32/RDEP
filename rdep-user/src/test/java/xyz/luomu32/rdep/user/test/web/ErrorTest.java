@@ -48,11 +48,11 @@ public class ErrorTest {
         this.mockMvc
                 .perform(get("/users"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("code", is(isEmptyOrNullString())))
+                .andExpect(jsonPath("code", is(emptyOrNullString())))
                 .andExpect(jsonPath("message", is(notNullValue())))
                 .andDo(document("error",
                         responseFields(
-                                fieldWithPath("code").type(JsonFieldType.NUMBER).description("错误码"),
+                                fieldWithPath("code").description("错误码"),
                                 fieldWithPath("message").description("错误消息"))));
     }
 }

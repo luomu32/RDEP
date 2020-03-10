@@ -1,0 +1,26 @@
+version: '3'
+services:
+  user:
+    build: rdep-user
+    image: rdep_user #如果同时指定build，image表示生成的镜像的名称；如果只有image，表示直接从镜像生成容器，而不必找Dockerfile构建镜像
+    container_name: rdep_user
+  project:
+    build: rdep-project
+    image: rdep_project
+    container_name: rdep_project
+  middleware:
+    build: rdep-middleware
+    image: rdep_middleware
+    container_name: rdep_middleware
+  gateway:
+    build: rdep-gateway
+    image: rdep_gateway
+    container_name: rdep_gateway
+    ports:
+    - "9999:9999"
+    depends_on:
+      - user
+      - project
+      - middleware
+
+

@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse auth(String username, String password) {
-        User user = userRepo.findByUsername(username).orElseThrow(() -> new ServiceException("user.not.found"));
+         User user = userRepo.findByUsername(username).orElseThrow(() -> new ServiceException("user.not.found"));
         if (user.getDeleted() == DeleteFlag.DELETED) {
             throw new ServiceException("user.not.found");
         }

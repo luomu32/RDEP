@@ -41,7 +41,7 @@ public class BuildServiceImpl implements BuildService {
     @Override
     public void build(Long projectId, Long moduleId) {
         Project project = projectRepo.findById(projectId).orElseThrow(() -> new ServiceException("project.not.found"));
-        Module module = moduleRepo.findById(moduleId).orElseThrow(() -> new ServiceException("module.not.found"));
+        xyz.luomu32.rdep.project.entity.Module module = moduleRepo.findById(moduleId).orElseThrow(() -> new ServiceException("module.not.found"));
 
         ModuleBuildHistory buildHistory = new ModuleBuildHistory();
         buildHistory.setModuleId(moduleId);
@@ -60,7 +60,7 @@ public class BuildServiceImpl implements BuildService {
 
     @Override
     @Async
-    public File fetchCode(Project project, Module module) {
+    public File fetchCode(Project project, xyz.luomu32.rdep.project.entity.Module module) {
 
         String dir = System.getProperty("user.home") + "/rdep workdir/";
         File projectDir = new File(dir + project.getName());
@@ -126,7 +126,7 @@ public class BuildServiceImpl implements BuildService {
     }
 
     @Override
-    public void unpack(File dir, Module module) {
+    public void unpack(File dir, xyz.luomu32.rdep.project.entity.Module module) {
         CommandLine cmdLine = new CommandLine("mvn -f " + dir.getAbsolutePath() + "/" + module.getName() + "/pom.xml clean package");
 
         DefaultExecutor executor = new DefaultExecutor();

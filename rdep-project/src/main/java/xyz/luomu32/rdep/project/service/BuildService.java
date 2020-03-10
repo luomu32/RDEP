@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface BuildService {
 
-    File fetchCode(Project project, Module module);
+    File fetchCode(Project project, xyz.luomu32.rdep.project.entity.Module module);
 
-    void unpack(File dir, Module module);
+    void unpack(File dir, xyz.luomu32.rdep.project.entity.Module module);
 
     void build(Long projectId, Long moduleId);
 
