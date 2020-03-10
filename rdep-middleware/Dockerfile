@@ -10,4 +10,4 @@ ENV JAVA_GC="-XX:+PrintGCDetails \
 ADD target/rdep-middleware-1.0-SNAPSHOT.jar middleware.jar
 EXPOSE 9999
 # For Spring-Boot project, use the entrypoint below to reduce Tomcat startup time.
-ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar gateway.jar --mysql.host=host.docker.internal --zk.host=host.docker.internal
+ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar middleware.jar --mysql.host=host.docker.internal --zk.host=host.docker.internal
