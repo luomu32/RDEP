@@ -8,3 +8,6 @@ RDEP依赖redis、zookeeper和数据库，但这三个运行在宿主机上，�
 - 修改容器的网络模式，改成host，与宿主机公用网络，需要注意端口不要与宿主机冲突。Mac与Windows不支持，Linux支持host模式，解决方案是"host.docker.internal".
 所以采用第二种方案。需要改造应用的配置，application.yml中依赖的中间件地址需要改成占位符，为了减少对正常开发影响，占位符提供默认值。
 比如zk的URL从localhost:2181改成${zk:localhost}:2181，在Dockerfile中，启动应用时传参数--zk=host.docker.internal
+
+使用方法
+在项目根目录执行：docker-compose up，将启动所有所需的容器，添加-d参数以后台方式运行容器。docker-compose down关闭容器并删除容器和网络
