@@ -6,7 +6,7 @@ spring:
     username: root
     password: 123456
   messages:
-    basename: messages/message
+    basename: messages/message,common-messages/message
     encoding: utf-8
   jpa:
     show-sql: true
