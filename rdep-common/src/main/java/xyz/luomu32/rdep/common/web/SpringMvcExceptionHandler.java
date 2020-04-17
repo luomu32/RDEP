@@ -6,10 +6,10 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -56,5 +56,11 @@ public class SpringMvcExceptionHandler extends ResponseEntityExceptionHandler {
                 new Object[]{ex.getParameterName(), ex.getParameterType()},
                 LocaleContextHolder.getLocale());
         return ResponseEntity.status(status).headers(headers).body(new ErrorResponse(errorMessage));
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleMissingPathVariable(MissingPathVariableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        String errorMessage = messageSource.getMessage("path.parameter.missing", new Object[]{ex.getVariableName()}, LocaleContextHolder.getLocale());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).headers(headers).body(new ErrorResponse(errorMessage));
     }
 }
