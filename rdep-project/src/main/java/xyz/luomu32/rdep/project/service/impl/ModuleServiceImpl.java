@@ -56,14 +56,13 @@ public class ModuleServiceImpl implements ModuleService {
     public void create(ModuleRequest moduleRequest) {
         moduleRepo.save(Module.builder()
                 .projectId(moduleRequest.getProjectId())
-                .label(moduleRequest.getLabel())
+                .serviceId(moduleRequest.getServiceId())
                 .configCenterUrl(moduleRequest.getConfigCenterUrl())
                 .name(moduleRequest.getName())
                 .scmUrl(moduleRequest.getScmUrl())
                 .principalId(moduleRequest.getPrincipalId())
                 .principalName(moduleRequest.getPrincipalName())
                 .build());
-
     }
 
     @Override
@@ -92,18 +91,7 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public ModuleResponse fetch(Long projectId, Long moduleId) {
-        Module module = moduleRepo.findById(moduleId).orElse(new Module());
-        ModuleResponse moduleResponse = new ModuleResponse();
-        moduleResponse.setId(module.getId());
-        moduleResponse.setName(module.getName());
-        moduleResponse.setScmUrl(module.getScmUrl());
-        moduleResponse.setDesc(module.getDesc());
-        moduleResponse.setPrincipalId(module.getPrincipalId());
-        moduleResponse.setPrincipalName(module.getPrincipalName());
-        moduleResponse.setLanguage(module.getLanguage());
-        moduleResponse.setFrameworks(module.getFrameworks());
-        moduleResponse.setInfo(module.getInfo());
-        return moduleResponse;
+        return ModuleResponse.from(moduleRepo.findById(moduleId).orElse(new Module()));
     }
 
     @Override
@@ -113,7 +101,7 @@ public class ModuleServiceImpl implements ModuleService {
             moduleResponse.setId(module.getId());
             moduleResponse.setName(module.getName());
             moduleResponse.setScmUrl(module.getScmUrl());
-            moduleResponse.setDesc(module.getDesc());
+            moduleResponse.setServiceId(module.getServiceId());
             moduleResponse.setPrincipalId(module.getPrincipalId());
             moduleResponse.setPrincipalName(module.getPrincipalName());
             moduleResponse.setLanguage(module.getLanguage());

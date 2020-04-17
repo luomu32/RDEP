@@ -22,10 +22,15 @@ public class Module extends BaseEntity {
 
     private String name;
 
-    private String label;
+    /**
+     * 用于服务发现
+     */
+    private String serviceId;
 
-    @Column(name = "\"desc\"")
-    private String desc;
+    /**
+     * 额外信息，用JSON
+     */
+    private String info;
 
     private Long principalId;
 
@@ -39,6 +44,5 @@ public class Module extends BaseEntity {
 
     private String configCenterUrl;
 
-    private String info;
 
 }
