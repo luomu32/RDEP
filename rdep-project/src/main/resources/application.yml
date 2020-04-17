@@ -10,12 +10,19 @@ spring:
     encoding: utf-8
   jpa:
     show-sql: true
+    openInView: false
   cloud:
     zookeeper:
       connectString: ${zk.host:localhost}:2181
 
 server:
   port: 0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 logging:
   level:
@@ -31,3 +38,15 @@ dubbo:
     serialization: fst
   scan:
     basePackages: xyz.luomu32.rdep.project.service.dubbo
+
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:p6spy:mysql://${mysql.host:localhost}:3306/rdep_project?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+#logging:
+#  level:
+#    root: INFO
+#    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+#    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
