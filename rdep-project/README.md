@@ -14,3 +14,6 @@
 
 ### WebConfig.java
 配置Validator和DateFormatter
+### 时区问题
+jdbc,url设置时区，与mysql的时区保持一致，不然LocalDate等带时区的时间会被转换
+在jdbc.datasource中加上serverTimezone=Asia/Shanghai，表明东八区
