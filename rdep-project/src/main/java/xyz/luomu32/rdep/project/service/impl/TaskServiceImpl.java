@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import xyz.luomu32.rdep.common.exception.ServiceException;
+import xyz.luomu32.rdep.common.jpa.DateRangeSpecification;
 import xyz.luomu32.rdep.project.entity.Task;
 import xyz.luomu32.rdep.project.entity.TaskState;
 import xyz.luomu32.rdep.project.pojo.task.TaskCreateRequest;
@@ -15,10 +16,6 @@ import xyz.luomu32.rdep.project.repo.ModuleRepo;
 import xyz.luomu32.rdep.project.repo.TaskRepo;
 import xyz.luomu32.rdep.project.service.TaskService;
 
-import javax.persistence.criteria.Predicate;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -86,27 +83,17 @@ public class TaskServiceImpl implements TaskService {
                 return null;
             return criteriaBuilder.equal(root.get("state"), TaskState.fromName(query.getState()).ordinal());
         };
-        //TODO WTF,直接作为Date（LocalDate）比较，不对，搞成String来比较对了。
-        //TODO，先搞单元测试，再看能不能解决，直接使用LocalDate.单元测试居然是对的
-        Specification<Task> startRange = (Specification<Task>) (root, criteriaQuery, criteriaBuilder) -> {
-            if (null == query.getStartStart() && null == query.getStartEnd())
-                return null;
-            if (null == query.getStartEnd() || query.getStartEnd().isEqual(query.getStartStart()))
-                return criteriaBuilder.greaterThanOrEqualTo(root.get("start"), query.getStartStart());
-            return criteriaBuilder.and(
-                    criteriaBuilder.greaterThanOrEqualTo(root.get("start").as(String.class), query.getStartStart().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
-                    criteriaBuilder.lessThanOrEqualTo(root.get("start").as(String.class), query.getStartEnd().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
-            );
+        Specification<Task> startRange = new DateRangeSpecification<Task>(query.getStart()) {
+            @Override
+            public String getField() {
+                return "start";
+            }
         };
-        Specification<Task> endRange = (Specification<Task>) (root, criteriaQuery, criteriaBuilder) -> {
-            if (null == query.getEndStart() && null == query.getEndEnd())
-                return null;
-            if (null == query.getEndEnd() || query.getEndEnd().isEqual(query.getEndStart()))
-                return criteriaBuilder.greaterThanOrEqualTo(root.get("end"), query.getEndStart());
-            return criteriaBuilder.and(
-                    criteriaBuilder.greaterThanOrEqualTo(root.get("end"), query.getEndStart()),
-                    criteriaBuilder.lessThanOrEqualTo(root.get("end"), query.getEndEnd())
-            );
+        Specification<Task> endRange = new DateRangeSpecification<Task>(query.getEnd()) {
+            @Override
+            public String getField() {
+                return "end";
+            }
         };
         return taskRepo
                 .findAll(matchProject.and(matchModule).and(matchPriority).and(matchCharger).and(matchState).and(startRange).and(endRange), page)
