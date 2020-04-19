@@ -9,12 +9,12 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.time.LocalDate;
 
-public class DateRangeSpec implements Specification<Task> {
-    
+public class TaskStartDateRangeSpec implements Specification<Task> {
+
     private LocalDate start;
     private LocalDate end;
 
-    public DateRangeSpec(LocalDate start, LocalDate end) {
+    public TaskStartDateRangeSpec(LocalDate start, LocalDate end) {
         this.start = start;
         this.end = end;
     }
