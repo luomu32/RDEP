@@ -8,7 +8,7 @@ ENV JAVA_GC="-XX:+PrintGCDetails \
 -XX:+UseGCLogFileRotation \
 -XX:NumberOfGCLogFiles=5"
 ADD target/rdep-project-1.0-SNAPSHOT.jar project.jar
-#RUN mkdir -p /log/gc
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 #EXPOSE 9898
 #ENTRYPOINT exec java $JAVA_OPTS $JAVA_GC -jar spring-boot-demo.jar
 # For Spring-Boot project, use the entrypoint below to reduce Tomcat startup time.
