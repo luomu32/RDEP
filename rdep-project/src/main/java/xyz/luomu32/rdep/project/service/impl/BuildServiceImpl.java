@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import xyz.luomu32.rdep.common.exception.ServiceException;
-import xyz.luomu32.rdep.project.entity.*;
+import xyz.luomu32.rdep.project.model.*;
 import xyz.luomu32.rdep.project.pojo.BuildHistoryResponse;
 import xyz.luomu32.rdep.project.repo.*;
 import xyz.luomu32.rdep.project.service.BuildService;
@@ -41,7 +41,7 @@ public class BuildServiceImpl implements BuildService {
     @Override
     public void build(Long projectId, Long moduleId) {
         Project project = projectRepo.findById(projectId).orElseThrow(() -> new ServiceException("project.not.found"));
-        xyz.luomu32.rdep.project.entity.Module module = moduleRepo.findById(moduleId).orElseThrow(() -> new ServiceException("module.not.found"));
+        xyz.luomu32.rdep.project.model.Module module = moduleRepo.findById(moduleId).orElseThrow(() -> new ServiceException("module.not.found"));
 
         ModuleBuildHistory buildHistory = new ModuleBuildHistory();
         buildHistory.setModuleId(moduleId);
@@ -60,7 +60,7 @@ public class BuildServiceImpl implements BuildService {
 
     @Override
     @Async
-    public File fetchCode(Project project, xyz.luomu32.rdep.project.entity.Module module) {
+    public File fetchCode(Project project, xyz.luomu32.rdep.project.model.Module module) {
 
         String dir = System.getProperty("user.home") + "/rdep workdir/";
         File projectDir = new File(dir + project.getName());
@@ -126,7 +126,7 @@ public class BuildServiceImpl implements BuildService {
     }
 
     @Override
-    public void unpack(File dir, xyz.luomu32.rdep.project.entity.Module module) {
+    public void unpack(File dir, xyz.luomu32.rdep.project.model.Module module) {
         CommandLine cmdLine = new CommandLine("mvn -f " + dir.getAbsolutePath() + "/" + module.getName() + "/pom.xml clean package");
 
         DefaultExecutor executor = new DefaultExecutor();

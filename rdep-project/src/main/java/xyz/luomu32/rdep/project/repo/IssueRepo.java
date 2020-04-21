@@ -4,8 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import xyz.luomu32.rdep.project.entity.Issue;
-import xyz.luomu32.rdep.project.entity.IssueWithoutContent;
+import xyz.luomu32.rdep.project.model.Issue;
+import xyz.luomu32.rdep.project.model.IssueWithoutContent;
 
 public interface IssueRepo extends JpaRepository<Issue, Long>, JpaSpecificationExecutor {
 

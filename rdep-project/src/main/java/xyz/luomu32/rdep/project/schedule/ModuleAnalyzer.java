@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import xyz.luomu32.rdep.project.entity.Module;
+import xyz.luomu32.rdep.project.model.Module;
 import xyz.luomu32.rdep.project.repo.ModuleRepo;
 
 import java.io.File;

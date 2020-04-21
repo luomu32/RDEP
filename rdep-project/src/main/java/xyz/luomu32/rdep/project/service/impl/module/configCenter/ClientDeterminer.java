@@ -1,10 +1,10 @@
 package xyz.luomu32.rdep.project.service.impl.module.configCenter;
 
 import xyz.luomu32.rdep.common.exception.ServiceException;
-import xyz.luomu32.rdep.project.entity.Module;
-import xyz.luomu32.rdep.project.entity.ModuleConfigCenter;
-import xyz.luomu32.rdep.project.entity.ModuleConfigCenterType;
-import xyz.luomu32.rdep.project.entity.Project;
+import xyz.luomu32.rdep.project.model.Module;
+import xyz.luomu32.rdep.project.model.ModuleConfigCenter;
+import xyz.luomu32.rdep.project.model.ModuleConfigCenterType;
+import xyz.luomu32.rdep.project.model.Project;
 
 public class ClientDeterminer {
     public static Client getClient(ModuleConfigCenter configCenter, Project project, Module module, String profile) {

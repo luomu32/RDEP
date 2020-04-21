@@ -1,10 +1,9 @@
 package xyz.luomu32.rdep.project.pojo.task;
 
 import lombok.Data;
-import xyz.luomu32.rdep.project.entity.Task;
+import xyz.luomu32.rdep.project.model.Task;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 public class TaskResponse {

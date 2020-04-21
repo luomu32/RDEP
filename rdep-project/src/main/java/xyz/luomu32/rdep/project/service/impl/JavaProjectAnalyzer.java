@@ -9,7 +9,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import xyz.luomu32.rdep.project.entity.Module;
+import xyz.luomu32.rdep.project.model.Module;
 import xyz.luomu32.rdep.project.service.Analyzer;
 import xyz.luomu32.rdep.project.service.AnalyzerResult;
 

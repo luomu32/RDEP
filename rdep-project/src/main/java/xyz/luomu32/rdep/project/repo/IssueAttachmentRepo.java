@@ -1,7 +1,7 @@
 package xyz.luomu32.rdep.project.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import xyz.luomu32.rdep.project.entity.IssueAttachment;
+import xyz.luomu32.rdep.project.model.IssueAttachment;
 
 import java.util.List;
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import xyz.luomu32.rdep.common.exception.ServiceException;
-import xyz.luomu32.rdep.project.entity.*;
+import xyz.luomu32.rdep.project.model.*;
 import xyz.luomu32.rdep.project.pojo.IssueAttachmentResponse;
 import xyz.luomu32.rdep.project.pojo.IssueRequest;
 import xyz.luomu32.rdep.project.pojo.IssueResponse;

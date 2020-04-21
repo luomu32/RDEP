@@ -2,7 +2,7 @@ package xyz.luomu32.rdep.project.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import xyz.luomu32.rdep.project.entity.ModuleBuild;
+import xyz.luomu32.rdep.project.model.ModuleBuild;
 
 import java.util.Optional;
 

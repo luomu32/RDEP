@@ -2,10 +2,15 @@ package xyz.luomu32.rdep.project.pojo.task;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.jpa.domain.Specification;
+import xyz.luomu32.rdep.common.jpa.EqualsSpecification;
 import xyz.luomu32.rdep.common.web.DateRange;
+import xyz.luomu32.rdep.project.model.Task;
 
-import java.beans.ConstructorProperties;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -41,4 +46,14 @@ public class TaskQueryRequest {
     private Integer priority;
 
     private Integer progress;
+
+    public Optional<Specification<Task>> buildSpec() {
+        List<Specification<Task>> specifications = new ArrayList<>();
+        if (null != projectId)
+            specifications.add((Specification) (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get("projectId"), projectId));
+        if (null != moduleId)
+            specifications.add(new EqualsSpecification<Task>("moduleId", moduleId));
+
+        return specifications.stream().reduce((spec1, spec2) -> spec1.and(spec2));
+    }
 }

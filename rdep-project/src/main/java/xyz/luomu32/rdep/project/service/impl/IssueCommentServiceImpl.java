@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import xyz.luomu32.rdep.common.Principal;
-import xyz.luomu32.rdep.project.entity.IssueComment;
+import xyz.luomu32.rdep.project.model.IssueComment;
 import xyz.luomu32.rdep.project.pojo.IssueCommentRequest;
 import xyz.luomu32.rdep.project.pojo.IssueCommentResponse;
 import xyz.luomu32.rdep.project.repo.IssueCommentRepo;

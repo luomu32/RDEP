@@ -2,7 +2,7 @@ package xyz.luomu32.rdep.project.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import xyz.luomu32.rdep.common.exception.ServiceException;
-import xyz.luomu32.rdep.project.entity.Module;
+import xyz.luomu32.rdep.project.model.Module;
 import xyz.luomu32.rdep.project.service.Analyzer;
 import xyz.luomu32.rdep.project.service.AnalyzerResult;
 

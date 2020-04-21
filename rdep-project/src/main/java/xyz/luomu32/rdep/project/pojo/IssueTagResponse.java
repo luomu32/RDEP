@@ -1,7 +1,7 @@
 package xyz.luomu32.rdep.project.pojo;
 
 import lombok.Data;
-import xyz.luomu32.rdep.project.entity.IssueTag;
+import xyz.luomu32.rdep.project.model.IssueTag;
 
 @Data
 public class IssueTagResponse {

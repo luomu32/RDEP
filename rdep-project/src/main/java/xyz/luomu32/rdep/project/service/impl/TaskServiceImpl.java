@@ -7,8 +7,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import xyz.luomu32.rdep.common.exception.ServiceException;
 import xyz.luomu32.rdep.common.jpa.DateRangeSpecification;
-import xyz.luomu32.rdep.project.entity.Task;
-import xyz.luomu32.rdep.project.entity.TaskState;
+import xyz.luomu32.rdep.project.model.Task;
+import xyz.luomu32.rdep.project.model.TaskState;
 import xyz.luomu32.rdep.project.pojo.task.TaskCreateRequest;
 import xyz.luomu32.rdep.project.pojo.task.TaskQueryRequest;
 import xyz.luomu32.rdep.project.pojo.task.TaskResponse;
@@ -17,6 +17,8 @@ import xyz.luomu32.rdep.project.repo.TaskRepo;
 import xyz.luomu32.rdep.project.service.TaskService;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -60,6 +62,9 @@ public class TaskServiceImpl implements TaskService {
         taskRepo.deleteById(id);
     }
 
+    //把Specification构建放在TaskQueryRequest。这样设计的话，就要求不同的查询方法，POJO就要不同
+    //把Specification放在实体类上，
+
     @Override
     public Page<TaskResponse> fetch(TaskQueryRequest query, Pageable page) {
         Specification<Task> matchProject = (Specification<Task>) (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.get("projectId"), query.getProjectId());
@@ -83,18 +88,8 @@ public class TaskServiceImpl implements TaskService {
                 return null;
             return criteriaBuilder.equal(root.get("state"), TaskState.fromName(query.getState()).ordinal());
         };
-        Specification<Task> startRange = new DateRangeSpecification<Task>(query.getStart()) {
-            @Override
-            public String getField() {
-                return "start";
-            }
-        };
-        Specification<Task> endRange = new DateRangeSpecification<Task>(query.getEnd()) {
-            @Override
-            public String getField() {
-                return "end";
-            }
-        };
+        Specification<Task> startRange = new DateRangeSpecification<Task>("start", query.getStart());
+        Specification<Task> endRange = new DateRangeSpecification<Task>("end", query.getEnd());
         return taskRepo
                 .findAll(matchProject.and(matchModule).and(matchPriority).and(matchCharger).and(matchState).and(startRange).and(endRange), page)
                 .map(TaskResponse::from);
@@ -102,8 +97,17 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskResponse> fetch(TaskQueryRequest query) {
-        //TODO 优先将Task进行DDD改造，将Specification与Entity集成，多个查询方法可共享Specification
-        throw new UnsupportedOperationException();
+        Optional<Specification<Task>> specification = query.buildSpec();
+        if (!specification.isPresent())
+            return taskRepo.findAll()
+                    .stream()
+                    .map(TaskResponse::from)
+                    .collect(Collectors.toList());
+
+        return taskRepo.findAll(specification.get())
+                .stream()
+                .map(TaskResponse::from)
+                .collect(Collectors.toList());
     }
 
     @Override

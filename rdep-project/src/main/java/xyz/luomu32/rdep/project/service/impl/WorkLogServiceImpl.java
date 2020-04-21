@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import xyz.luomu32.rdep.common.Principal;
 import xyz.luomu32.rdep.common.exception.ServiceException;
-import xyz.luomu32.rdep.project.entity.WorkLog;
+import xyz.luomu32.rdep.project.model.WorkLog;
 import xyz.luomu32.rdep.project.pojo.WorkLogRequest;
 import xyz.luomu32.rdep.project.pojo.WorkLogResponse;
 import xyz.luomu32.rdep.project.repo.WorkLogRepo;

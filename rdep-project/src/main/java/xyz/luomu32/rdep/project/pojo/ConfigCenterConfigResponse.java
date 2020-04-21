@@ -1,7 +1,7 @@
 package xyz.luomu32.rdep.project.pojo;
 
 import lombok.Data;
-import xyz.luomu32.rdep.project.entity.ModuleConfigCenter;
+import xyz.luomu32.rdep.project.model.ModuleConfigCenter;
 
 @Data
 public class ConfigCenterConfigResponse {

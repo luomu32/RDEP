@@ -1,9 +1,9 @@
 package xyz.luomu32.rdep.project.pojo;
 
 import lombok.Data;
-import xyz.luomu32.rdep.project.entity.Issue;
-import xyz.luomu32.rdep.project.entity.IssueTag;
-import xyz.luomu32.rdep.project.entity.IssueWithoutContent;
+import xyz.luomu32.rdep.project.model.Issue;
+import xyz.luomu32.rdep.project.model.IssueTag;
+import xyz.luomu32.rdep.project.model.IssueWithoutContent;
 
 import java.time.LocalDateTime;
 import java.util.List;

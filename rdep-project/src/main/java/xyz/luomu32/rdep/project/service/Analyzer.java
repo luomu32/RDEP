@@ -1,6 +1,6 @@
 package xyz.luomu32.rdep.project.service;
 
-import xyz.luomu32.rdep.project.entity.Module;
+import xyz.luomu32.rdep.project.model.Module;
 
 import java.io.File;
 

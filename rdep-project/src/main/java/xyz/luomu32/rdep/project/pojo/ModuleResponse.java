@@ -1,7 +1,7 @@
 package xyz.luomu32.rdep.project.pojo;
 
 import lombok.Data;
-import xyz.luomu32.rdep.project.entity.Module;
+import xyz.luomu32.rdep.project.model.Module;
 
 @Data
 public class ModuleResponse {

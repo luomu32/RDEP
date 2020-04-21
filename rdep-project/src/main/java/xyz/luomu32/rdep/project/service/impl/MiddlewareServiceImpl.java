@@ -2,7 +2,7 @@ package xyz.luomu32.rdep.project.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xyz.luomu32.rdep.project.entity.Middleware;
+import xyz.luomu32.rdep.project.model.Middleware;
 import xyz.luomu32.rdep.project.pojo.MiddlewareRequest;
 import xyz.luomu32.rdep.project.repo.MiddlewareRepo;
 import xyz.luomu32.rdep.project.service.DockerService;

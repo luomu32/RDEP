@@ -3,7 +3,7 @@ package xyz.luomu32.rdep.project.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.luomu32.rdep.common.exception.ServiceException;
-import xyz.luomu32.rdep.project.entity.IssueTag;
+import xyz.luomu32.rdep.project.model.IssueTag;
 import xyz.luomu32.rdep.project.pojo.IssueTagRequest;
 import xyz.luomu32.rdep.project.pojo.IssueTagResponse;
 import xyz.luomu32.rdep.project.repo.IssueTagRepo;

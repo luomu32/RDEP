@@ -1,7 +1,7 @@
 package xyz.luomu32.rdep.project.pojo;
 
 import lombok.Data;
-import xyz.luomu32.rdep.project.entity.Project;
+import xyz.luomu32.rdep.project.model.Project;
 
 import java.time.LocalDateTime;
 

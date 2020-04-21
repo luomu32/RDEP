@@ -3,7 +3,7 @@ package xyz.luomu32.rdep.project.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
-import xyz.luomu32.rdep.project.entity.IssueStatus;
+import xyz.luomu32.rdep.project.model.IssueStatus;
 import xyz.luomu32.rdep.project.pojo.IssueAttachmentResponse;
 import xyz.luomu32.rdep.project.pojo.IssueRequest;
 import xyz.luomu32.rdep.project.pojo.IssueResponse;

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import xyz.luomu32.rdep.project.entity.IssueStatus;
+import xyz.luomu32.rdep.project.model.IssueStatus;
 import xyz.luomu32.rdep.project.pojo.IssueRequest;
 import xyz.luomu32.rdep.project.pojo.IssueResponse;
 import xyz.luomu32.rdep.project.service.IssueService;

@@ -1,8 +1,8 @@
 package xyz.luomu32.rdep.project.pojo;
 
 import lombok.Data;
-import xyz.luomu32.rdep.project.entity.ModuleBuildCommitHistory;
-import xyz.luomu32.rdep.project.entity.ModuleBuildHistory;
+import xyz.luomu32.rdep.project.model.ModuleBuildCommitHistory;
+import xyz.luomu32.rdep.project.model.ModuleBuildHistory;
 
 import java.time.LocalDateTime;
 import java.util.List;

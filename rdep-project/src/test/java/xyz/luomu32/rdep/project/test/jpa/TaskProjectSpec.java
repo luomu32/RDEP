@@ -1,7 +1,7 @@
 package xyz.luomu32.rdep.project.test.jpa;
 
 import org.springframework.data.jpa.domain.Specification;
-import xyz.luomu32.rdep.project.entity.Task;
+import xyz.luomu32.rdep.project.model.Task;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
