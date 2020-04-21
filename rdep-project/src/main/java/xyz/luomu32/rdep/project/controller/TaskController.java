@@ -16,6 +16,7 @@ import xyz.luomu32.rdep.project.service.TaskService;
 
 import java.util.List;
 
+//PathVariable like projectId、moduleId will auto inject
 @RestController
 @RequestMapping(
         {
@@ -29,12 +30,7 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping
-    public void create(@Validated TaskCreateRequest task,
-                       @PathVariable Long projectId,
-                       @PathVariable(required = false) Long moduleId) {
-        task.setProjectId(projectId);
-        if (null != moduleId)
-            task.setModuleId(moduleId);
+    public void create(@Validated TaskCreateRequest task) {
         taskService.create(task);
     }
 
@@ -44,21 +40,12 @@ public class TaskController {
     }
 
     @GetMapping
-    public Page<TaskResponse> fetch(TaskQueryRequest query, Pageable pageable,
-                                    @PathVariable Long projectId,
-                                    @PathVariable(required = false) Long moduleId) {
-        query.setProjectId(projectId);
-        if (null != moduleId)
-            query.setModuleId(moduleId);
+    public Page<TaskResponse> fetch(TaskQueryRequest query, Pageable pageable) {
         return taskService.fetch(query, pageable);
     }
 
     @GetMapping(params = "all")
-    public List<TaskResponse> fetch(TaskQueryRequest query,
-                                    @PathVariable Long projectId,
-                                    @PathVariable Long moduleId) {
-        query.setProjectId(projectId);
-        query.setModuleId(moduleId);
+    public List<TaskResponse> fetch(TaskQueryRequest query) {
         return taskService.fetch(query);
     }
 }
