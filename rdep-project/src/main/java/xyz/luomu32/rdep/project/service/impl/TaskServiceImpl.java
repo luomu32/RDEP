@@ -9,6 +9,8 @@ import xyz.luomu32.rdep.common.exception.ServiceException;
 import xyz.luomu32.rdep.common.jpa.DateRangeSpecification;
 import xyz.luomu32.rdep.project.model.Task;
 import xyz.luomu32.rdep.project.model.TaskState;
+import xyz.luomu32.rdep.project.model.Task_;
+import xyz.luomu32.rdep.project.model.spec.TaskSpec;
 import xyz.luomu32.rdep.project.pojo.task.TaskCreateRequest;
 import xyz.luomu32.rdep.project.pojo.task.TaskQueryRequest;
 import xyz.luomu32.rdep.project.pojo.task.TaskResponse;
@@ -98,6 +100,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<TaskResponse> fetch(TaskQueryRequest query) {
         Optional<Specification<Task>> specification = query.buildSpec();
+        Specification<Task> title = (root, cQuery, builder) -> builder.equal(root.get(Task_.title), "");
         if (!specification.isPresent())
             return taskRepo.findAll()
                     .stream()

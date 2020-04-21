@@ -56,13 +56,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.github.log4jdbc-forjdbi</groupId>-->
-        <!--            <artifactId>log4jdbc</artifactId>-->
-        <!--            <version>1.2</version>-->
-        <!--        </dependency>-->
-
-
+        <!--JDBC Driver包裹，提供SQL打印功能-->
         <dependency>
             <groupId>p6spy</groupId>
             <artifactId>p6spy</artifactId>
@@ -116,6 +110,11 @@
             <groupId>org.jacoco</groupId>
             <artifactId>org.jacoco.core</artifactId>
             <version>0.8.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
         </dependency>
 
 
