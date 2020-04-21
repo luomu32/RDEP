@@ -143,7 +143,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
-                            <excludes>RealDatabaseTest.java</excludes>
+                            <groups>xyz.luomu32.rdep.project.test.category.DevCategory</groups>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -156,6 +156,9 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <groups>xyz.luomu32.rdep.project.test.category.TestCategory</groups>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>

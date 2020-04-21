@@ -3,6 +3,7 @@ package xyz.luomu32.rdep.project.test.jpa;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -14,6 +15,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import xyz.luomu32.rdep.project.model.Task;
 import xyz.luomu32.rdep.project.repo.TaskRepo;
+import xyz.luomu32.rdep.project.test.category.DevCategory;
+import xyz.luomu32.rdep.project.test.category.TestCategory;
 
 import java.time.LocalDate;
 
@@ -29,6 +32,7 @@ import java.time.LocalDate;
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@Category({DevCategory.class, TestCategory.class})
 public class EmbeddedDatabaseTaskRepoTest {
 
     @Autowired

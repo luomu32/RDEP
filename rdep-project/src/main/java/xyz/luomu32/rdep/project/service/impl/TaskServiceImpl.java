@@ -99,15 +99,11 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskResponse> fetch(TaskQueryRequest query) {
-        Optional<Specification<Task>> specification = query.buildSpec();
-        Specification<Task> title = (root, cQuery, builder) -> builder.equal(root.get(Task_.title), "");
-        if (!specification.isPresent())
-            return taskRepo.findAll()
-                    .stream()
-                    .map(TaskResponse::from)
-                    .collect(Collectors.toList());
-
-        return taskRepo.findAll(specification.get())
+        TaskSpec taskSpec = new TaskSpec();
+        return taskRepo.findAll(
+                taskSpec.isBelongToProject(query.getProjectId())
+                        .and(taskSpec.isBelongToModule(query.getModuleId()))
+                        .and(taskSpec.isTitleEquals(query.getTitle())))
                 .stream()
                 .map(TaskResponse::from)
                 .collect(Collectors.toList());

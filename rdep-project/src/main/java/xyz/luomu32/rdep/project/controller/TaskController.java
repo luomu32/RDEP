@@ -1,5 +1,8 @@
 package xyz.luomu32.rdep.project.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,6 +47,11 @@ public class TaskController {
         return taskService.fetch(query, pageable);
     }
 
+    @HystrixCommand(threadPoolProperties = {
+            @HystrixProperty(name = "coreSize", value = "5"),
+            @HystrixProperty(name = "maxQueueSize", value = "-1")
+
+    })
     @GetMapping(params = "all")
     public List<TaskResponse> fetch(TaskQueryRequest query) {
         return taskService.fetch(query);

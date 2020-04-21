@@ -2,6 +2,7 @@ package xyz.luomu32.rdep.project.test.jpa;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 import xyz.luomu32.rdep.project.model.Task;
 import xyz.luomu32.rdep.project.repo.TaskRepo;
+import xyz.luomu32.rdep.project.test.category.TestCategory;
 
 import java.time.LocalDate;
 
@@ -24,6 +26,7 @@ import java.time.LocalDate;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 //测试的都是查询，不需要事务回滚.目前还不能用，Hibernate检测没有事务会报错
 //@Transactional(propagation = Propagation.NOT_SUPPORTED)
+@Category(TestCategory.class)
 public class RealDatabaseTest {
 
     @Autowired

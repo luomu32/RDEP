@@ -2,6 +2,7 @@ package xyz.luomu32.rdep.project;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +24,7 @@ import javax.servlet.MultipartConfigElement;
 @EnableAsync
 @EnableJpaAuditing
 @EnableFeignClients
+@EnableCircuitBreaker
 public class ProjectConfig {
 
     @Bean
