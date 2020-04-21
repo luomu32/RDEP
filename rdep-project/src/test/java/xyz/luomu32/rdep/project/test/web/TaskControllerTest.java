@@ -9,23 +9,20 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultHandler;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import xyz.luomu32.rdep.project.controller.TaskController;
-import xyz.luomu32.rdep.project.model.Task;
 import xyz.luomu32.rdep.project.pojo.task.TaskQueryRequest;
 import xyz.luomu32.rdep.project.pojo.task.TaskResponse;
 import xyz.luomu32.rdep.project.service.TaskService;
-import xyz.luomu32.rdep.project.test.JunitCategory;
+import xyz.luomu32.rdep.project.test.category.DevCategory;
+import xyz.luomu32.rdep.project.test.category.TestCategory;
 
-import java.util.Collection;
 import java.util.Collections;
 
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -34,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(TaskController.class)
-@Category(JunitCategory.Dev.class)
+@Category({DevCategory.class, TestCategory.class})
 public class TaskControllerTest {
     @Autowired
     private MockMvc mvc;
@@ -60,8 +57,7 @@ public class TaskControllerTest {
 
         this.mvc.perform(get("/projects/1/tasks").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"content\":[{\"id\":null,\"title\":null,\"projectId\":null,\"moduleId\":null,\"moduleName\":null,\"start\":null,\"end\":null,\"chargerId\":null,\"chargerName\":null,\"state\":null,\"progress\":null,\"priority\":null}],\"pageable\":\"INSTANCE\",\"last\":true,\"totalPages\":1,\"totalElements\":1,\"size\":1,\"number\":0,\"numberOfElements\":1,\"first\":true,\"sort\":{\"sorted\":false,\"unsorted\":true,\"empty\":true},\"empty\":false}"))
-                .andDo(MockMvcResultHandlers.print());
+                .andExpect(content().json("{\"content\":[{\"id\":null,\"title\":null,\"projectId\":null,\"moduleId\":null,\"moduleName\":null,\"start\":null,\"end\":null,\"chargerId\":null,\"chargerName\":null,\"state\":null,\"progress\":null,\"priority\":null}],\"pageable\":\"INSTANCE\",\"last\":true,\"totalPages\":1,\"totalElements\":1,\"size\":1,\"number\":0,\"numberOfElements\":1,\"first\":true,\"sort\":{\"sorted\":false,\"unsorted\":true,\"empty\":true},\"empty\":false}"));
     }
 
 }
