@@ -6,6 +6,36 @@ spring:
   cloud:
     zookeeper:
       connectString: ${zk.host:localhost}:2181
+    gateway:
+      routes:
+        - id: user
+          uri: lb://user
+          predicates:
+            - Path=/users/**
+        - id: role
+          uri: lb://user
+          predicates:
+            - Path=/roles/**
+        - id: work-log
+          uri: lb://project
+          predicates:
+            - Path=/work-logs/**
+        - id: middleware
+          uri: lb://middleware
+          predicates:
+            - Path=/middleware/**
+        - id: project
+          uri: lb://project
+          predicates:
+            - Path=/projects/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: '#{@ipKeyResolver}'
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+
+
 
 server:
   port: 9999
