@@ -160,6 +160,16 @@
                             <groups>xyz.luomu32.rdep.project.test.category.TestCategory</groups>
                         </configuration>
                     </plugin>
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>dockerfile-maven-plugin</artifactId>
+                        <version>1.4.10</version>
+                        <configuration>
+                            <dockerfile>Dockerfile</dockerfile>
+                            <tag>${version}</tag>
+                            <repository>rdep/project</repository>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
