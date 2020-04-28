@@ -26,7 +26,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("projects/{projectId}/modules/{moduleId}")
-public class BuildController {
+public class ModuleBuildController {
 
     @Autowired
     private BuildService buildService;

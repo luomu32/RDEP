@@ -18,6 +18,7 @@ import xyz.luomu32.rdep.project.pojo.task.TaskResponse;
 import xyz.luomu32.rdep.project.service.TaskService;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 //PathVariable like projectId、moduleId will auto inject
 @RestController
@@ -47,13 +48,18 @@ public class TaskController {
         return taskService.fetch(query, pageable);
     }
 
-    @HystrixCommand(threadPoolProperties = {
-            @HystrixProperty(name = "coreSize", value = "5"),
-            @HystrixProperty(name = "maxQueueSize", value = "-1")
-
-    })
+//    @HystrixCommand(threadPoolProperties = {
+//            @HystrixProperty(name = "coreSize", value = "5"),
+//            @HystrixProperty(name = "maxQueueSize", value = "-1"),
+//            @HystrixProperty(name = "", value = "")
+//    })
     @GetMapping(params = "all")
     public List<TaskResponse> fetch(TaskQueryRequest query) {
+        try {
+            TimeUnit.MILLISECONDS.sleep(700);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return taskService.fetch(query);
     }
 }

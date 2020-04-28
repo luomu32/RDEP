@@ -14,9 +14,23 @@ spring:
   cloud:
     zookeeper:
       connectString: ${zk.host:localhost}:2181
+  servlet:
+    multipart:
+      max-file-size: 20MB #单个文件最大
+      max-request-size: 200MB #总上传数据总大小
 
 server:
   port: 0
+
+#feign:
+#  client:
+#    config:
+#      jenkins:
+#        requestInterceptors:
+#          - feign.auth.BasicAuthRequestInterceptor
+
+jenkins:
+  host: localhost:8989
 
 management:
   endpoints:

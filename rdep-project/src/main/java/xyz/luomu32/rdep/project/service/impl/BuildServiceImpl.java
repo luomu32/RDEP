@@ -8,6 +8,8 @@ import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import xyz.luomu32.rdep.common.exception.ServiceException;
@@ -15,6 +17,7 @@ import xyz.luomu32.rdep.project.model.*;
 import xyz.luomu32.rdep.project.pojo.BuildHistoryResponse;
 import xyz.luomu32.rdep.project.repo.*;
 import xyz.luomu32.rdep.project.service.BuildService;
+import xyz.luomu32.rdep.project.service.JenkinsService;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,18 +39,29 @@ public class BuildServiceImpl implements BuildService {
     @Autowired
     private ModuleBuildRepo moduleBuildRepo;
     @Autowired
+    private ModuleBuildConfigRepo moduleBuildConfigRepo;
+    @Autowired
     private ModuleBuildCommitHistoryRepo moduleBuildCommitHistoryRepo;
+    @Autowired
+    private JenkinsService jenkinsService;
 
     @Override
     public void build(Long projectId, Long moduleId) {
         Project project = projectRepo.findById(projectId).orElseThrow(() -> new ServiceException("project.not.found"));
         xyz.luomu32.rdep.project.model.Module module = moduleRepo.findById(moduleId).orElseThrow(() -> new ServiceException("module.not.found"));
 
-        ModuleBuildHistory buildHistory = new ModuleBuildHistory();
-        buildHistory.setModuleId(moduleId);
-        buildHistory.setStatus(ModuleBuildHistoryStatus.BUILDING);
-        moduleBuildHistoryRepo.save(buildHistory);
-        fetchCode(project, module);
+        Optional<ModuleBuildConfig> buildConfig = moduleBuildConfigRepo.findByModuleId(moduleId);
+
+        if (buildConfig.isPresent() && buildConfig.get().getType().equals(ModuleBuildType.JENKINS)) {
+            ResponseEntity<Void> response = jenkinsService.createBuild("dubbo-demo", "1234");
+            System.out.println(response.getStatusCode());
+        } else {
+            ModuleBuildHistory buildHistory = new ModuleBuildHistory();
+            buildHistory.setModuleId(moduleId);
+            buildHistory.setStatus(ModuleBuildHistoryStatus.BUILDING);
+            moduleBuildHistoryRepo.save(buildHistory);
+            fetchCode(project, module);
+        }
     }
 
     @Override

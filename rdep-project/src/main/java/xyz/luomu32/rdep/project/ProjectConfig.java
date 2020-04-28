@@ -35,16 +35,6 @@ public class ProjectConfig {
     }
 
     @Bean
-    public MultipartConfigElement multipartConfigElement() {
-        MultipartConfigFactory factory = new MultipartConfigFactory();
-        //单个文件最大
-        factory.setMaxFileSize(DataSize.ofMegabytes(20));
-        /// 设置总上传数据总大小
-        factory.setMaxRequestSize(DataSize.ofMegabytes(200));
-        return factory.createMultipartConfig();
-    }
-
-    @Bean
     public DefaultExceptionHandler defaultExceptionHandler(@Autowired MessageSource messageSource) {
         return new DefaultExceptionHandler(messageSource);
     }
