@@ -14,6 +14,7 @@ import xyz.luomu32.rdep.user.entity.UserStatus;
 import xyz.luomu32.rdep.user.pojo.UserCreateCmd;
 import xyz.luomu32.rdep.user.pojo.UserRequest;
 import xyz.luomu32.rdep.user.pojo.UserResponse;
+import xyz.luomu32.rdep.user.pojo.UserUpdateCmd;
 import xyz.luomu32.rdep.user.repo.RoleRepo;
 import xyz.luomu32.rdep.user.repo.UserRepo;
 import xyz.luomu32.rdep.user.service.UserService;
@@ -54,6 +55,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void update(UserUpdateCmd updateCmd) {
+
+    }
+
+    @Override
     public void changePass(Long id, String newPass, String oldPass) {
         User user = userRepo.findById(id).orElseThrow(() -> new ServiceException("user.not.found"));
         if (!user.getPassword().equals(oldPass)) {
@@ -66,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse auth(String username, String password) {
-         User user = userRepo.findByUsername(username).orElseThrow(() -> new ServiceException("user.not.found"));
+        User user = userRepo.findByUsername(username).orElseThrow(() -> new ServiceException("user.not.found"));
         if (user.getDeleted() == DeleteFlag.DELETED) {
             throw new ServiceException("user.not.found");
         }

@@ -5,11 +5,14 @@ import org.springframework.data.domain.Pageable;
 import xyz.luomu32.rdep.user.pojo.UserCreateCmd;
 import xyz.luomu32.rdep.user.pojo.UserRequest;
 import xyz.luomu32.rdep.user.pojo.UserResponse;
+import xyz.luomu32.rdep.user.pojo.UserUpdateCmd;
 
 import java.util.List;
 
 public interface UserService {
     void create(UserCreateCmd createCmd);
+
+    void update(UserUpdateCmd updateCmd);
 
     void changePass(Long id, String newPass, String oldPass);
 

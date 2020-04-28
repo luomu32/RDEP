@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import xyz.luomu32.rdep.user.pojo.UserCreateCmd;
 import xyz.luomu32.rdep.user.pojo.UserRequest;
 import xyz.luomu32.rdep.user.pojo.UserResponse;
+import xyz.luomu32.rdep.user.pojo.UserUpdateCmd;
 import xyz.luomu32.rdep.user.service.UserService;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    void update(@PathVariable Long id) {
-
+    void update(UserUpdateCmd userUpdateCmd) {
+        userService.update(userUpdateCmd);
     }
 
     @PostMapping("{id}/change-pass")
@@ -38,7 +39,7 @@ public class UserController {
         return userService.auth(username, password);
     }
 
-    @GetMapping
+    @GetMapping()
     Page<UserResponse> fetch(UserRequest request, Pageable pageable) {
         return userService.fetch(request, pageable);
     }
@@ -49,7 +50,7 @@ public class UserController {
         return userService.search(username);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("{id:\\d+}")
     UserResponse fetch(@PathVariable Long id) {
         return userService.fetch(id);
     }
