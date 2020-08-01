@@ -8,4 +8,6 @@ import java.util.List;
 public interface ModuleRepo extends JpaRepository<Module, Long> {
 
     List<Module> findByProjectId(Long projectId);
+
+    boolean existsByProjectIdAndServiceId(Long project, String serviceId);
 }

@@ -54,6 +54,10 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public void create(ModuleRequest moduleRequest) {
+        boolean serviceIdExist = moduleRepo.existsByProjectIdAndServiceId(moduleRequest.getProjectId(), moduleRequest.getServiceId());
+        if (serviceIdExist) {
+            throw new ServiceException("module.service.id.exist");
+        }
         moduleRepo.save(Module.builder()
                 .projectId(moduleRequest.getProjectId())
                 .serviceId(moduleRequest.getServiceId())

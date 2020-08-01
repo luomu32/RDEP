@@ -3,8 +3,10 @@ package xyz.luomu32.rdep.project.service.impl;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.RetryOneTime;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Service;
 
+import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

@@ -8,6 +8,7 @@ import org.jacoco.core.analysis.IClassCoverage;
 import org.jacoco.core.analysis.ICoverageVisitor;
 import org.jacoco.core.data.ExecutionDataStore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import xyz.luomu32.rdep.common.exception.ServiceException;
 import xyz.luomu32.rdep.project.model.Module;
@@ -18,6 +19,7 @@ import xyz.luomu32.rdep.project.repo.ProjectRepo;
 import xyz.luomu32.rdep.project.service.Analyzer;
 import xyz.luomu32.rdep.project.service.AnalyzerResult;
 import xyz.luomu32.rdep.project.service.BuildService;
+import xyz.luomu32.rdep.project.service.JenkinsService;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +41,8 @@ public class ModuleBuildController {
 
     @Autowired
     private Analyzer analyzer;
+    @Autowired
+    private JenkinsService jenkinsService;
 
     @PostMapping("build")
     public void build(@PathVariable Long projectId,
@@ -56,6 +60,13 @@ public class ModuleBuildController {
     public List<BuildHistoryResponse> fetch(@PathVariable Long projectId,
                                             @PathVariable Long moduleId) {
         return buildService.fetchBuildHistories(projectId, moduleId);
+    }
+
+    @GetMapping("jenkins")
+    public void fetchBuild(@RequestParam String name, @RequestParam(defaultValue = "1") Integer number) {
+        ResponseEntity<JenkinsService.BuildInfo> buildResponse = jenkinsService.fetchBuildInfo(name, number);
+        System.out.println(buildResponse.getStatusCodeValue());
+        System.out.println(buildResponse.getBody());
     }
 
     @PostMapping("analyze")

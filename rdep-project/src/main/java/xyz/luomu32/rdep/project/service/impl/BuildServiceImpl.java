@@ -52,16 +52,16 @@ public class BuildServiceImpl implements BuildService {
 
         Optional<ModuleBuildConfig> buildConfig = moduleBuildConfigRepo.findByModuleId(moduleId);
 
-        if (buildConfig.isPresent() && buildConfig.get().getType().equals(ModuleBuildType.JENKINS)) {
-            ResponseEntity<Void> response = jenkinsService.createBuild("dubbo-demo", "1234");
-            System.out.println(response.getStatusCode());
-        } else {
-            ModuleBuildHistory buildHistory = new ModuleBuildHistory();
-            buildHistory.setModuleId(moduleId);
-            buildHistory.setStatus(ModuleBuildHistoryStatus.BUILDING);
-            moduleBuildHistoryRepo.save(buildHistory);
-            fetchCode(project, module);
-        }
+//        if (buildConfig.isPresent() && buildConfig.get().getType().equals(ModuleBuildType.JENKINS)) {
+        ResponseEntity<Void> response = jenkinsService.createBuild("dubbo-demo", "1234");
+//        System.out.println(response.getQueueId());
+//        } else {
+//            ModuleBuildHistory buildHistory = new ModuleBuildHistory();
+//            buildHistory.setModuleId(moduleId);
+//            buildHistory.setStatus(ModuleBuildHistoryStatus.BUILDING);
+//            moduleBuildHistoryRepo.save(buildHistory);
+//            fetchCode(project, module);
+//        }
     }
 
     @Override

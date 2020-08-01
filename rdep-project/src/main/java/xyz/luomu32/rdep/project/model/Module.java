@@ -18,8 +18,9 @@ public class Module extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Long projectId;
-
+    @Column(nullable = false)
     private String name;
 
     /**
@@ -35,7 +36,7 @@ public class Module extends BaseEntity {
     private Long principalId;
 
     private String principalName;
-
+    @Column(nullable = false)
     private String scmUrl;
 
     private String language;

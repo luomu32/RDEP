@@ -23,7 +23,7 @@ public class JenkinsTest {
     @Autowired
     private JenkinsService jenkinsService;
 
-    @Test
+//    @Test
     public void testJob() {
         OkHttpClient client = new OkHttpClient();
         //user
@@ -50,14 +50,9 @@ public class JenkinsTest {
         }
     }
 
-    @Test
+//    @Test
     public void testCreateBuild() {
         Assertions.assertThat(jenkinsService).isNotNull();
     }
 
-    @Test
-    public void testCookie() {
-        String[] cookie = "JSESSIONID.73a15be3=node012px4nj7wol1pblh8tf2pkai115.node0; Path=/; HttpOnly".split(";");
-        Stream.of(cookie).forEach(System.out::println);
-    }
 }
