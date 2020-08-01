@@ -25,13 +25,13 @@ public class DefaultExceptionHandler {
         ErrorResponse response = new ErrorResponse();
 
         if (e.getParameters() == null || e.getParameters().length == 0) {
-            response.setMessage(messageSource.getMessage(e.getMessage(), new Object[0], LocaleContextHolder.getLocale()));
+            response.setMessage(messageSource.getMessage(e.getMessage(), new Object[0], e.getMessage(), LocaleContextHolder.getLocale()));
         } else {
-            response.setMessage(messageSource.getMessage(e.getMessage(), e.getParameters(), LocaleContextHolder.getLocale()));
+            response.setMessage(messageSource.getMessage(e.getMessage(), e.getParameters(), e.getMessage(), LocaleContextHolder.getLocale()));
         }
         if (null != e.getCode())
             response.setCode(e.getCode().toString());
-
+        response.setDetail(e.getDetail());
         return response;
     }
 
