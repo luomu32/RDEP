@@ -5,20 +5,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>RDEP</artifactId>
-        <groupId>xyz.luomu32</groupId>
+        <artifactId>parent</artifactId>
+        <groupId>xyz.luomu32.rdep</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>rdep-user</artifactId>
+    <artifactId>user</artifactId>
 
-    <name>rdep-user</name>
+    <name>user</name>
 
     <properties>
 
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>xyz.luomu32.rdep</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -74,12 +80,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>xyz.luomu32</groupId>
-            <artifactId>rdep-common</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>

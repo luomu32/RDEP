@@ -5,16 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>RDEP</artifactId>
-        <groupId>xyz.luomu32</groupId>
+        <artifactId>parent</artifactId>
+        <groupId>xyz.luomu32.rdep</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>xyz.luomu32</groupId>
-    <artifactId>rdep-middleware</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>middleware</artifactId>
 
-    <name>rdep-middleware</name>
+    <name>middleware</name>
 
     <properties>
     </properties>

@@ -8,9 +8,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultHandler;
-import xyz.luomu32.rdep.user.UserConfig;
 import xyz.luomu32.rdep.user.WebConfig;
 import xyz.luomu32.rdep.user.service.RoleService;
 import xyz.luomu32.rdep.user.service.UserService;
@@ -22,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest
-@Import({UserConfig.class, WebConfig.class})
+@Import({ WebConfig.class})
 public class WebExceptionHandleTest {
 
     @Autowired

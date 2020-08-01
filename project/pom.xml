@@ -4,22 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>RDEP</artifactId>
-        <groupId>xyz.luomu32</groupId>
+        <artifactId>parent</artifactId>
+        <groupId>xyz.luomu32.rdep</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>rdep-project</artifactId>
+    <artifactId>project</artifactId>
 
-    <name>rdep-project</name>
+    <name>project</name>
 
     <properties>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>xyz.luomu32</groupId>
-            <artifactId>rdep-common</artifactId>
+            <groupId>xyz.luomu32.rdep</groupId>
+            <artifactId>common</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

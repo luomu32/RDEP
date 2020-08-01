@@ -12,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import xyz.luomu32.rdep.common.JacksonMapperBuilderCustomizer;
 import xyz.luomu32.rdep.common.LocalDateFormatter;
 import xyz.luomu32.rdep.common.LocalDateTimeFormatter;
+import xyz.luomu32.rdep.common.exception.DefaultExceptionHandler;
+import xyz.luomu32.rdep.common.web.SpringMvcExceptionHandler;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -37,5 +39,15 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer customizer() {
         return new JacksonMapperBuilderCustomizer();
+    }
+
+    @Bean
+    public SpringMvcExceptionHandler exceptionHandler() {
+        return new SpringMvcExceptionHandler(messageSource);
+    }
+
+    @Bean
+    public DefaultExceptionHandler defaultExceptionHandler() {
+        return new DefaultExceptionHandler(messageSource);
     }
 }
